@@ -16,6 +16,8 @@ public class ChatSession {
 
     private String title;
 
+    private long lastUpdate;
+
     @OneToMany(mappedBy = "session", cascade = CascadeType.PERSIST)
     private List<ChatMessage> messages;
 
@@ -49,5 +51,13 @@ public class ChatSession {
 
     public void setMessages(List<ChatMessage> messages) {
         this.messages = messages;
+    }
+
+    public long getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(long lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

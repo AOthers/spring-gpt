@@ -1,13 +1,16 @@
 package com.example.spring_gpt.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Mask {
 
     @Id
-    private String maskId;
+    //用于指定实体类中主键字段的生成策略,AUTO指由JPA提供者自动选择最合适的自增策略
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long maskId;
 
     private String avatar; //头像链接
 
@@ -15,11 +18,14 @@ public class Mask {
 
     private String hint; //预设词
 
-    public String getMaskId() {
+    @OneToMany(mappedBy = "mask", cascade = CascadeType.PERSIST)
+    private List<ChatMessage> context;
+
+    public Long getMaskId() {
         return maskId;
     }
 
-    public void setMaskId(String maskId) {
+    public void setMaskId(Long maskId) {
         this.maskId = maskId;
     }
 
@@ -45,5 +51,13 @@ public class Mask {
 
     public void setHint(String hint) {
         this.hint = hint;
+    }
+
+    public List<ChatMessage> getContext() {
+        return context;
+    }
+
+    public void setContext(List<ChatMessage> context) {
+        this.context = context;
     }
 }

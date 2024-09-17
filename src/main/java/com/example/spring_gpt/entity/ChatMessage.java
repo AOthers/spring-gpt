@@ -15,9 +15,15 @@ public class ChatMessage {
 
     private String avatar;
 
+    @Column(length = 2000)  //字数限制变成2000
     private String content;
 
     private String time;
+
+    @ManyToOne
+    @JoinColumn(name = "mask_id")
+    @JsonIgnore
+    private Mask mask;
 
     @ManyToOne
     @JoinColumn(name = "sessionId")
@@ -70,5 +76,13 @@ public class ChatMessage {
 
     public void setSession(ChatSession session) {
         this.session = session;
+    }
+
+    public Mask getMask() {
+        return mask;
+    }
+
+    public void setMask(Mask mask) {
+        this.mask = mask;
     }
 }
